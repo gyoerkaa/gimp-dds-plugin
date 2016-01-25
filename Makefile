@@ -2,6 +2,8 @@
 GIMPTOOL = gimptool-2.0
 #	$(GIMPTOOL) --build src/file-dds.c
 
+CC = gcc
+
 LIBS := $(shell $(GIMPTOOL) --libs)
 
 CFLAGS := $(shell $(GIMPTOOL) --cflags)
@@ -12,7 +14,7 @@ TARGET = $(OUTDIR)/file-dds
 
 all:
 	mkdir -p $(OUTDIR)
-	gcc src/plugin.c $(CFLAGS) $(LIBS) -o $(TARGET)
+	$(CC) src/plugin.c $(CFLAGS) $(LIBS) -o $(TARGET)
 
 clean:
 	rm -f *.o $(TARGET)

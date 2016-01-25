@@ -32,7 +32,7 @@ typedef struct DDS_HEADER {
 // DDS caps flags 1.
 enum {
     DDSCAPS1_COMPLEX = 0x00000008,  // 2D image or cube map
-    DDSCAPS1_TEXTURE = 0x00001000,  // Should be always set
+    DDSCAPS1_TEXTURE = 0x00001000,  // Should always be set
     DDSCAPS1_MIPMAP  = 0x00400000   // Image contains mimaps
 };
 
