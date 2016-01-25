@@ -1,9 +1,10 @@
 #include <libgimp/gimp.h>
 
-#include "file-dds.h"
+#include "plugin.h"
 
 #define LOAD_PROCEDURE "file-dds-load"
 #define SAVE_PROCEDURE "file-dds-save"
+
 
 static void query (void);
 static void run   (const gchar      *name,
@@ -108,8 +109,7 @@ static void run(const gchar      *name,
     return_values[0].type = GIMP_PDB_STATUS;
     return_values[0].data.d_status = status;
 
-    /* Getting run_mode - we won't display a dialog if
-    * we are in NONINTERACTIVE mode */
+    /* Get run_mode - don't display a dialog if in NONINTERACTIVE mode */
     run_mode = param[0].data.d_int32;
     if(!strcmp(name, LOAD_PROCEDURE))
     {
