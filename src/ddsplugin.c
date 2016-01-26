@@ -1,17 +1,6 @@
 #include <libgimp/gimp.h>
 
-#include "plugin.h"
-
-#define LOAD_PROCEDURE "file-dds-load"
-#define SAVE_PROCEDURE "file-dds-save"
-
-
-static void query (void);
-static void run   (const gchar      *name,
-                   gint              nparams,
-                   const GimpParam  *param,
-                   gint             *nreturn_vals,
-                   GimpParam       **return_vals);
+#include "ddsplugin.h"
 
 
 GimpPlugInInfo PLUG_IN_INFO =
@@ -99,7 +88,7 @@ static void run(const gchar      *name,
 {
     static GimpParam return_values[2];
     GimpPDBStatusType status = GIMP_PDB_SUCCESS;
-    GimpRunMode       run_mode;
+    GimpRunMode run_mode;
 
     /* Mandatory output values */
     *nreturn_vals = 1;
