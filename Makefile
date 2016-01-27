@@ -14,7 +14,7 @@ TARGET = $(OUTDIR)/file-dds
 
 all:
 	mkdir -p $(OUTDIR)
-	$(CC) src/ddsplugin.c $(CFLAGS) $(LIBS) -o $(TARGET)
+	$(CC) src/plugin.c $(CFLAGS) $(LIBS) -o $(TARGET)
 
 clean:
 	rm -f *.o $(TARGET)

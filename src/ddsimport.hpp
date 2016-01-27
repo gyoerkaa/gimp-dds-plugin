@@ -1,6 +1,8 @@
 #ifndef DDSIMPORT_H
 #define DDSIMPORT_H
 
+#include <string>
+
 class DDSImport {
 public:
     DDSImport();
