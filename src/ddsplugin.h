@@ -1,15 +1,14 @@
 #ifndef DDSPLUGIN_H
 #define DDSPLUGIN_H
 
+#include "options.h"
+
+
 #define LOAD_PROCEDURE "file-dds-load"
 #define SAVE_PROCEDURE "file-dds-save"
 
-typedef struct DDSImportOptions
-{
-    gint mipmaps;
-} DDSImportOptions;
-
 static DDSImportOptions import_options = {0};
+static DDSExportOptions export_options = {0};
 
 static void query (void);
 

@@ -1,10 +1,10 @@
 #include <libgimp/gimp.h>
 #include <libgimp/gimpui.h>
 
-//#include <cstring>
+#include <cstring>
 
-#include "plugin.h"
-//#include "ddsimport.hpp"
+#include "ddsplugin.h"
+#include "ddsimport.hpp"
 //#include "ddsexport.hpp"
 
 
@@ -33,7 +33,7 @@ static void query (void)
         {GIMP_PDB_DRAWABLE, (gchar*)"drawable",     (gchar*)"Drawable to save" },
         {GIMP_PDB_STRING,   (gchar*)"filename",     (gchar*)"The name of the file to save the image in" },
         {GIMP_PDB_STRING,   (gchar*)"raw-filename", (gchar*)"The name entered" },
-        {GIMP_PDB_INT32,    (gchar*)"mipmaps",      (gchar*)"0 = None, 1 = Generate, 2 = Get from layers"},
+        {GIMP_PDB_INT32,    (gchar*)"mipmaps",      (gchar*)"Write Mipmaps: 0 = None, 1 = Generate, 2 = Get from layers"},
     };
 
     // Install load procedure
@@ -103,10 +103,19 @@ static void run (const gchar      *name,
         {
             case GIMP_RUN_INTERACTIVE:
             case GIMP_RUN_WITH_LAST_VALS:
+                gimp_get_data(LOAD_PROCEDURE, &import_options);
+                break;
             case GIMP_RUN_NONINTERACTIVE:
+                // TODO: Check nparams, get values from param
+                break;
             default:
-               g_message("load dds\n");
-               break;
+                g_message("load dds\n");
+                break;
+        }
+
+        if(status == GIMP_PDB_SUCCESS)
+        {
+            DDSImport dds = DDSImport();
         }
     }
     else if (!strcmp(name, SAVE_PROCEDURE))
@@ -117,10 +126,14 @@ static void run (const gchar      *name,
         switch (run_mode)
         {
             case GIMP_RUN_INTERACTIVE:
-            case GIMP_RUN_WITH_LAST_VALS:
+                /* Get options last values */
                 gimp_get_data(LOAD_PROCEDURE, &import_options);
                 break;
+            case GIMP_RUN_WITH_LAST_VALS:
+                gimp_get_data(SAVE_PROCEDURE, &import_options);
+                break;
             case GIMP_RUN_NONINTERACTIVE:
+                break;
             default:
                g_message("save dds\n");
                break;

@@ -1,8 +1,8 @@
 
 GIMPTOOL = gimptool-2.0
-#	$(GIMPTOOL) --build src/file-dds.c
+#	$(GIMPTOOL) --build src/ddsplugin.c
 
-CC = gcc
+CC = g++
 
 LIBS := $(shell $(GIMPTOOL) --libs)
 
@@ -12,9 +12,17 @@ OUTDIR = bin
 
 TARGET = $(OUTDIR)/file-dds
 
+SOURCES +=  src/ddsplugin.c \
+			src/ddsimport.cpp 
+
+HEADERS  += src/ddsplugin.h \
+			src/options.h \
+			src/ddsheader.h \
+    		src/ddsimport.hpp
+
 all:
 	mkdir -p $(OUTDIR)
-	$(CC) src/plugin.c $(CFLAGS) $(LIBS) -o $(TARGET)
+	$(CC) $(SOURCES) $(HEADERS) $(CFLAGS) $(LIBS) -o $(TARGET) -std=c++11
 
 clean:
 	rm -f *.o $(TARGET)

@@ -1,6 +1,9 @@
 #ifndef DDS_HEADER_H
 #define DDS_HEADER_H
 
+//#include <stdint.h> // no C++11
+#include <cstdint>
+
 typedef struct DDS_PIXELFORMAT {
   uint32_t dwSize;
   uint32_t dwFlags;
@@ -17,7 +20,7 @@ typedef struct DDS_HEADER {
   uint32_t        dwFlags;
   uint32_t        dwHeight;
   uint32_t        dwWidth;
-  uint32_t        dwPitchOrLinearSize;
+  uint32_t        dwPitch; // dwPitchOrLinearSize
   uint32_t        dwDepth;
   uint32_t        dwMipMapCount;
   uint32_t        dwReserved1[11];
