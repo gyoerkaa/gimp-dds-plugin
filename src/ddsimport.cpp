@@ -1,6 +1,5 @@
 #include "ddsimport.hpp"
 
-//#include <fstream>
 #include <cstdio>
 #include <cstdint>
 #include <libgimp/gimp.h>
@@ -56,7 +55,7 @@ bool DDSImport::readHeader ()
         return false;
     }
     // DDS_HEADER struct
-    // TODO: Check for errors where possible
+    // TODO: Sanity checks where possible
     // TODO: Clean this up
     std::fread(&m_header.dwSize, sizeof(m_header.dwSize), 1, m_file);
     std::fread(&m_header.dwFlags, sizeof(m_header.dwFlags), 1, m_file);
@@ -80,6 +79,7 @@ bool DDSImport::readHeader ()
     std::fread(&m_header.dwCaps2, sizeof(m_header.dwCaps2), 1, m_file);
     std::fread(&m_header.dwCaps3, sizeof(m_header.dwCaps3), 1, m_file);
     std::fread(&m_header.dwCaps4, sizeof(m_header.dwCaps4), 1, m_file);
+    std::fread(&m_header.dwReserved2, sizeof(m_header.dwReserved2), 1, m_file);
     // Check for DXT10 header
     if ((m_header.ddspf.dwFourCC == FOURCC_DX10) and
         (m_header.ddspf.dwFlags & DDPF_FOURCC))
