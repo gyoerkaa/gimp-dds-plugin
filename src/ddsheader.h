@@ -4,6 +4,14 @@
 //#include <stdint.h> // no C++11
 #include <cstdint>
 
+typedef struct DDS_HEADER_DXT10{
+  uint32_t   dxgiFormat;
+  uint32_t   resourceDimension;
+  uint32_t   miscFlag;
+  uint32_t   arraySize;
+  uint32_t   miscFlags2;
+} DDS_HEADER_DXT10;
+
 typedef struct DDS_PIXELFORMAT {
   uint32_t dwSize;
   uint32_t dwFlags;
@@ -14,6 +22,8 @@ typedef struct DDS_PIXELFORMAT {
   uint32_t dwBBitMask;
   uint32_t dwABitMask;
 } DDS_PIXELFORMAT;
+
+
 
 typedef struct DDS_HEADER {
   uint32_t        dwSize;
@@ -31,6 +41,16 @@ typedef struct DDS_HEADER {
   uint32_t        dwCaps4;          // Unused
   uint32_t        dwReserved2;
 } DDS_HEADER;
+
+
+enum {
+    DDPF_ALPHAPIXELS  = 0x00000001,   // Has alpha channel
+    DDPF_ALPHA        = 0x00000002,   // Compressed
+    DDPF_FOURCC       = 0x00000004,   // Contains compressed RGB
+    DDPF_RGB          = 0x00000040,
+    DDPF_YUV          = 0x00000200,
+    DDPF_LUMINANCE    = 0x00020000
+};
 
 // DDS caps flags 1
 enum {
@@ -50,5 +70,7 @@ enum {
     DDSCAPS2_CUBEMAP_NEGATIVEZ = 0x00008000,
     DDSCAPS2_VOLUME            = 0x00200000   // 3D/volume texture
 };
+
+
 
 #endif

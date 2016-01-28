@@ -78,5 +78,13 @@ bool DDSImport::readHeader ()
     // DDS_HEADER struct
     std::fread(&m_header.dwCaps1, sizeof(m_header.dwCaps1), 1, m_file);
     std::fread(&m_header.dwCaps2, sizeof(m_header.dwCaps2), 1, m_file);
+    std::fread(&m_header.dwCaps3, sizeof(m_header.dwCaps3), 1, m_file);
+    std::fread(&m_header.dwCaps4, sizeof(m_header.dwCaps4), 1, m_file);
+    // Check for DXT10 header
+    if ((m_header.ddspf.dwFourCC == FOURCC_DX10) and
+        (m_header.ddspf.dwFlags & DDPF_FOURCC))
+    {
+
+    }
 }
 

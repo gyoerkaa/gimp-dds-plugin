@@ -11,6 +11,7 @@
 #define FOURCC_DXT3     MAKE4CC('D', 'X', 'T', '3')
 #define FOURCC_DXT4     MAKE4CC('D', 'X', 'T', '4')
 #define FOURCC_DXT5     MAKE4CC('D', 'X', 'T', '5')
+#define FOURCC_DX10     MAKE4CC('D', 'X', '1', '0')
 #define FOURCC_DWMAGIC  MAKE4CC('D', 'D', 'S', ' ')
 
 class DDSImport {
@@ -21,7 +22,8 @@ public:
 private:
     std::string m_filename;
     FILE *m_file;
-    DDS_HEADER  m_header;
+    DDS_HEADER m_header;
+    DDS_HEADER_DXT10 m_headerDxt10;
 
     void init();
     bool readHeader();
