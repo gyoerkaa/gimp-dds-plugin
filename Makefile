@@ -13,9 +13,11 @@ OUTDIR = bin
 TARGET = $(OUTDIR)/file-dds
 
 SOURCES +=  src/ddsplugin.c \
+			src/ddsui.c \
 			src/ddsimport.cpp 
 
-HEADERS  += src/ddsplugin.h \
+HEADERS	+=  src/ddsplugin.h \
+		    src/ddsui.h \
 			src/options.h \
 			src/ddsheader.h \
     		src/ddsimport.hpp

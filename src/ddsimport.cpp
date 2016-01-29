@@ -47,16 +47,15 @@ bool DDSImport::read (const std::string filename)
 
 bool DDSImport::readHeader ()
 {
-    uint32_t dwmagic;
-    std::fread(&dwmagic, sizeof(dwmagic), 1, m_file);
-    if (dwmagic != FOURCC_DWMAGIC)
+    std::fread(&m_dwMagic, sizeof(m_dwMagic), 1, m_file);
+    if (m_dwMagic != FOURCC_DWMAGIC)
     {
         g_message("Invalid DDS file.\n");
         return false;
     }
-    // DDS_HEADER struct
     // TODO: Sanity checks where possible
     // TODO: Clean this up
+    // DDS_HEADER struct
     std::fread(&m_header.dwSize, sizeof(m_header.dwSize), 1, m_file);
     std::fread(&m_header.dwFlags, sizeof(m_header.dwFlags), 1, m_file);
     std::fread(&m_header.dwHeight, sizeof(m_header.dwHeight), 1, m_file);
@@ -64,7 +63,7 @@ bool DDSImport::readHeader ()
     std::fread(&m_header.dwPitch, sizeof(m_header.dwPitch), 1, m_file);
     std::fread(&m_header.dwDepth, sizeof(m_header.dwDepth), 1, m_file);
     std::fread(&m_header.dwMipMapCount, sizeof(m_header.dwMipMapCount), 1, m_file);
-    std::fseek(m_file, 44, SEEK_CUR); // Unused, 11 DWORDS = 44 bytes
+    std::fseek(m_file, 44, SEEK_CUR); // Unused, 11 DWORDS
     // DDS_PIXELFORMAT (sub)struct
     std::fread(&m_header.ddspf.dwSize, sizeof(&m_header.ddspf.dwSize), 1, m_file);
     std::fread(&m_header.ddspf.dwFlags, sizeof(&m_header.ddspf.dwFlags), 1, m_file);

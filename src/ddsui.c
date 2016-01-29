@@ -1,0 +1,52 @@
+#include "ddsui.h"
+#include "options.h"
+
+#include <gtk/gtk.h>
+#include <libgimp/gimp.h>
+#include <libgimp/gimpui.h>
+
+static void toggle_clicked(GtkWidget *widget, gpointer data)
+{
+   int *flag = (int*)data;
+   (*flag) = !(*flag);
+}
+
+int load_dialog (void)
+{
+    int run;
+
+    gimp_ui_init("file-dds", FALSE);
+
+    GtkWidget *dialog = gimp_dialog_new("DDS Import Options", "file-dds",
+                                        NULL, (GtkDialogFlags)0,
+                                        gimp_standard_help_func, "file-dds",
+                                        GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL,
+                                        GTK_STOCK_OK, GTK_RESPONSE_OK,
+                                        NULL);
+    gimp_window_set_transient(GTK_WINDOW(dialog));
+
+    GtkWidget *main_vbox = gtk_vbox_new (FALSE, 6);
+    gtk_container_add(GTK_CONTAINER(GTK_DIALOG(dialog)->vbox), main_vbox);
+    gtk_widget_show(main_vbox);
+
+    GtkWidget *checkboxMipmaps = gtk_check_button_new_with_label("Load mipmaps");
+    gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(checkboxMipmaps),
+                                 dds_import_options.mipmaps);
+    gtk_signal_connect(GTK_OBJECT(checkboxMipmaps),
+                       "clicked",
+                       GTK_SIGNAL_FUNC(toggle_clicked),
+                       &dds_import_options.mipmaps);
+    gtk_box_pack_start(GTK_BOX(main_vbox), checkboxMipmaps, 1, 1, 0);
+    gtk_widget_show(checkboxMipmaps);
+
+    run = (gimp_dialog_run(GIMP_DIALOG (dialog)) == GTK_RESPONSE_OK);
+    gtk_widget_destroy(dialog);
+
+    return run;
+}
+
+
+int save_dialog (void)
+{
+    return 0;
+}

@@ -22,7 +22,8 @@ public:
 private:
     std::string m_filename;
     FILE *m_file;
-    DDS_HEADER m_header;
+    uint32_t         m_dwMagic;
+    DDS_HEADER       m_header;
     DDS_HEADER_DXT10 m_headerDxt10;
 
     void init();

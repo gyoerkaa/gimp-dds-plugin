@@ -31,7 +31,7 @@ typedef struct DDS_HEADER {
   uint32_t        dwReserved2;
 } DDS_HEADER;
 
-typedef struct DDS_HEADER_DXT10{
+typedef struct DDS_HEADER_DXT10 {
   uint32_t   dxgiFormat;
   uint32_t   resourceDimension;
   uint32_t   miscFlag;
@@ -39,24 +39,24 @@ typedef struct DDS_HEADER_DXT10{
   uint32_t   miscFlags2;
 } DDS_HEADER_DXT10;
 
-enum {
+typedef enum DDS_FLAGS {
     DDPF_ALPHAPIXELS  = 0x00000001,   // Has alpha channel
     DDPF_ALPHA        = 0x00000002,   // Compressed
     DDPF_FOURCC       = 0x00000004,   // Contains compressed RGB
     DDPF_RGB          = 0x00000040,
     DDPF_YUV          = 0x00000200,
     DDPF_LUMINANCE    = 0x00020000
-};
+} DDS_FLAGS;
 
 // DDS caps flags 1
-enum {
+typedef enum DDS_CAPS1 {
     DDSCAPS1_COMPLEX = 0x00000008,  // 2D image or cube map
     DDSCAPS1_TEXTURE = 0x00001000,  // Should always be set
     DDSCAPS1_MIPMAP  = 0x00400000   // Image contains mimaps
-};
+} DDS_CAPS1;
 
 // DDS caps flags 2
-enum {
+typedef enum DDS_CAPS2 {
     DDSCAPS2_CUBEMAP           = 0x00000200,
     DDSCAPS2_CUBEMAP_POSITIVEX = 0x00000400,
     DDSCAPS2_CUBEMAP_NEGATIVEX = 0x00000800,
@@ -65,7 +65,7 @@ enum {
     DDSCAPS2_CUBEMAP_POSITIVEZ = 0x00004000,
     DDSCAPS2_CUBEMAP_NEGATIVEZ = 0x00008000,
     DDSCAPS2_VOLUME            = 0x00200000   // 3D/volume texture
-};
+} DDS_CAPS2;
 
 typedef enum DXGI_FORMAT {
   DXGI_FORMAT_UNKNOWN                     = 0,

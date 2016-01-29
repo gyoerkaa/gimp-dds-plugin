@@ -3,12 +3,11 @@
 
 #include "options.h"
 
-
 #define LOAD_PROCEDURE "file-dds-load"
 #define SAVE_PROCEDURE "file-dds-save"
 
-static DDSImportOptions import_options = {0};
-static DDSExportOptions export_options = {0};
+DDSImportOptions dds_import_options = {0};
+DDSExportOptions dds_export_options = {0};
 
 static void query (void);
 

@@ -1,10 +1,10 @@
 #include <libgimp/gimp.h>
-#include <libgimp/gimpui.h>
 
 #include <cstring>
 
 #include "ddsplugin.h"
-#include "ddsimport.hpp"
+#include "ddsui.h"
+//#include "ddsimport.hpp"
 //#include "ddsexport.hpp"
 
 
@@ -102,20 +102,23 @@ static void run (const gchar      *name,
         switch (run_mode)
         {
             case GIMP_RUN_INTERACTIVE:
+                /* Get options last values */
+                gimp_get_data(LOAD_PROCEDURE, &dds_import_options);
+                load_dialog();
+                break;
             case GIMP_RUN_WITH_LAST_VALS:
-                gimp_get_data(LOAD_PROCEDURE, &import_options);
+                gimp_get_data(LOAD_PROCEDURE, &dds_import_options);
                 break;
             case GIMP_RUN_NONINTERACTIVE:
                 // TODO: Check nparams, get values from param
                 break;
             default:
-                g_message("load dds\n");
                 break;
         }
 
         if(status == GIMP_PDB_SUCCESS)
         {
-            DDSImport dds = DDSImport();
+            //DDSImport dds = DDSImport();
         }
     }
     else if (!strcmp(name, SAVE_PROCEDURE))
@@ -127,15 +130,15 @@ static void run (const gchar      *name,
         {
             case GIMP_RUN_INTERACTIVE:
                 /* Get options last values */
-                gimp_get_data(LOAD_PROCEDURE, &import_options);
+                gimp_get_data(SAVE_PROCEDURE, &dds_export_options);
+                save_dialog();
                 break;
             case GIMP_RUN_WITH_LAST_VALS:
-                gimp_get_data(SAVE_PROCEDURE, &import_options);
+                gimp_get_data(SAVE_PROCEDURE, &dds_export_options);
                 break;
             case GIMP_RUN_NONINTERACTIVE:
                 break;
             default:
-               g_message("save dds\n");
                break;
         }
 
