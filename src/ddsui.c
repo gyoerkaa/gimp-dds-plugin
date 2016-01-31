@@ -29,15 +29,25 @@ int load_dialog (void)
     gtk_container_add(GTK_CONTAINER(GTK_DIALOG(dialog)->vbox), main_vbox);
     gtk_widget_show(main_vbox);
 
-    GtkWidget *checkboxMipmaps = gtk_check_button_new_with_label("Load mipmaps");
-    gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(checkboxMipmaps),
+    GtkWidget *chboxMipmaps = gtk_check_button_new_with_label("Load mipmaps");
+    gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(chboxMipmaps),
                                  dds_import_options.mipmaps);
-    gtk_signal_connect(GTK_OBJECT(checkboxMipmaps),
+    gtk_signal_connect(GTK_OBJECT(chboxMipmaps),
                        "clicked",
                        GTK_SIGNAL_FUNC(toggle_clicked),
                        &dds_import_options.mipmaps);
-    gtk_box_pack_start(GTK_BOX(main_vbox), checkboxMipmaps, 1, 1, 0);
-    gtk_widget_show(checkboxMipmaps);
+    gtk_box_pack_start(GTK_BOX(main_vbox), chboxMipmaps, 1, 1, 0);
+    gtk_widget_show(chboxMipmaps);
+
+    GtkWidget *chboxDecode = gtk_check_button_new_with_label("Decode YCoCg/AExp images");
+    gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(chboxDecode),
+                                 dds_import_options.decode);
+    gtk_signal_connect(GTK_OBJECT(chboxDecode),
+                       "clicked",
+                       GTK_SIGNAL_FUNC(toggle_clicked),
+                       &dds_import_options.decode);
+    gtk_box_pack_start(GTK_BOX(main_vbox), chboxDecode, 1, 1, 0);
+    gtk_widget_show(chboxDecode);
 
     run = (gimp_dialog_run(GIMP_DIALOG (dialog)) == GTK_RESPONSE_OK);
     gtk_widget_destroy(dialog);

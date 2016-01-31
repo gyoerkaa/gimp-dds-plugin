@@ -6,6 +6,7 @@
 typedef struct DDSImportOptions
 {
     gint mipmaps;
+    gint decode;
 } DDSImportOptions;
 
 typedef struct DDSExportOptions
