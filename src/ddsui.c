@@ -13,7 +13,7 @@ static void toggle_clicked(GtkWidget *widget, gpointer data)
 
 int load_dialog (void)
 {
-    int run;
+    int run = 0;
 
     gimp_ui_init("file-dds", FALSE);
 
@@ -58,5 +58,24 @@ int load_dialog (void)
 
 int save_dialog (void)
 {
-    return 0;
+    int run = 0;
+
+    gimp_ui_init("file-dds", FALSE);
+
+    GtkWidget *dialog = gimp_dialog_new("DDS Export Options", "file-dds",
+                                        NULL, (GtkDialogFlags)0,
+                                        gimp_standard_help_func, "file-dds",
+                                        GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL,
+                                        GTK_STOCK_OK, GTK_RESPONSE_OK,
+                                        NULL);
+    gimp_window_set_transient(GTK_WINDOW(dialog));
+
+    GtkWidget *main_vbox = gtk_vbox_new (FALSE, 6);
+    gtk_container_add(GTK_CONTAINER(GTK_DIALOG(dialog)->vbox), main_vbox);
+    gtk_widget_show(main_vbox);
+
+    run = (gimp_dialog_run(GIMP_DIALOG (dialog)) == GTK_RESPONSE_OK);
+    gtk_widget_destroy(dialog);
+
+    return run;
 }

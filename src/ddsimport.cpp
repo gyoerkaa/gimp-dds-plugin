@@ -31,18 +31,13 @@ bool DDSImport::read (const std::string filename)
         g_message("Invalid dds file.\n");
         return false;
     }
-    /*
-    std::ifstream file(m_filename.c_str(), std::ifstream::binary | std::ifstream::in);
-    if (!file.good())
-    {
-        g_message("Error opening file.\n");
-        return(GIMP_PDB_EXECUTION_ERROR);
-    }
+
     uint32_t dwmagic;
 
-    file.read(&dwmagic, sizeof(dwmagic));
-    file.close();
-    */
+    std::fread(&dwmagic, sizeof(dwmagic), 1, m_file);
+    this->readHeader();
+    std::fclose(m_file);
+
 }
 
 bool DDSImport::readHeader ()
@@ -76,14 +71,19 @@ bool DDSImport::readHeader ()
     // DDS_HEADER struct
     std::fread(&m_header.dwCaps1, sizeof(m_header.dwCaps1), 1, m_file);
     std::fread(&m_header.dwCaps2, sizeof(m_header.dwCaps2), 1, m_file);
-    std::fread(&m_header.dwCaps3, sizeof(m_header.dwCaps3), 1, m_file);
-    std::fread(&m_header.dwCaps4, sizeof(m_header.dwCaps4), 1, m_file);
+    std::fread(&m_header.dwCaps3, sizeof(m_header.dwCaps3), 1, m_file); // Unused
+    std::fread(&m_header.dwCaps4, sizeof(m_header.dwCaps4), 1, m_file); // Unused
     std::fread(&m_header.dwReserved2, sizeof(m_header.dwReserved2), 1, m_file);
     // Check for DXT10 header
     if ((m_header.ddspf.dwFourCC == FOURCC_DX10) and
         (m_header.ddspf.dwFlags & DDPF_FOURCC))
     {
-
+        std::fread(&m_headerDxt10.dxgiFormat, sizeof(m_headerDxt10.dxgiFormat), 1, m_file);
+        std::fread(&m_headerDxt10.resourceDimension, sizeof(m_headerDxt10.resourceDimension), 1, m_file);
+        std::fread(&m_headerDxt10.miscFlags1, sizeof(m_headerDxt10.miscFlags1), 1, m_file);
+        std::fread(&m_headerDxt10.arraySize, sizeof(m_headerDxt10.arraySize), 1, m_file);
+        std::fread(&m_headerDxt10.miscFlags2, sizeof(m_headerDxt10.miscFlags2), 1, m_file);
     }
-}
 
+    return true;
+}

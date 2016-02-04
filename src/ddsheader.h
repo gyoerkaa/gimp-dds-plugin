@@ -34,7 +34,7 @@ typedef struct DDS_HEADER {
 typedef struct DDS_HEADER_DXT10 {
   uint32_t   dxgiFormat;
   uint32_t   resourceDimension;
-  uint32_t   miscFlag;
+  uint32_t   miscFlags1;
   uint32_t   arraySize;
   uint32_t   miscFlags2;
 } DDS_HEADER_DXT10;
