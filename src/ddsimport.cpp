@@ -48,6 +48,9 @@ bool DDSImport::readHeader ()
         g_message("Invalid DDS file.\n");
         return false;
     }
+
+#define READHEAD(prop)  if (!std::fread(&m_header.prop, sizeof (m_header.prop), 1, m_file)) \
+                            return false
     // TODO: Sanity checks where possible
     // TODO: Clean this up
     // DDS_HEADER struct
